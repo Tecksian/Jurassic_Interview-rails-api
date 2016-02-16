@@ -6,13 +6,13 @@ class CagesController < ApplicationController
   def index
     @cages = Cage.all
 
-    render json: @cages
+    expose @cages
   end
 
   # GET /cages/1
   # GET /cages/1.json
   def show
-    render json: @cage
+    expose @cage
   end
 
   # POST /cages
@@ -21,9 +21,9 @@ class CagesController < ApplicationController
     @cage = Cage.new(cage_params)
 
     if @cage.save
-      render json: @cage, status: :created, location: @cage
+      expose @cage, status: :created, location: @cage
     else
-      render json: @cage.errors, status: :unprocessable_entity
+      expose @cage.errors, status: :unprocessable_entity
     end
   end
 
@@ -35,7 +35,7 @@ class CagesController < ApplicationController
     if @cage.update(cage_params)
       head :no_content
     else
-      render json: @cage.errors, status: :unprocessable_entity
+      expose @cage.errors, status: :unprocessable_entity
     end
   end
 
@@ -49,11 +49,11 @@ class CagesController < ApplicationController
 
   private
 
-    def set_cage
-      @cage = Cage.find(params[:id])
-    end
+  def set_cage
+    @cage = Cage.find(params[:id])
+  end
 
-    def cage_params
-      params.require(:cage).permit(:max_occupancy, :powered_up)
-    end
+  def cage_params
+    params.require(:cage).permit(:max_occupancy, :powered_up)
+  end
 end
