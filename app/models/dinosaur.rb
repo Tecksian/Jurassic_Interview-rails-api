@@ -8,5 +8,6 @@ class Dinosaur < ActiveRecord::Base
             uniqueness: true
 
   belongs_to :species, inverse_of: :dinosaurs, validate: true
+  belongs_to :cage, inverse_of: :dinosaurs, validate: true
 end
 
