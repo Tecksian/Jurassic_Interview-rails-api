@@ -6,24 +6,23 @@ class DinosaursController < ApplicationController
   def index
     @dinosaurs = Dinosaur.all
 
-    render json: @dinosaurs
+    expose @dinosaurs
   end
 
   # GET /dinosaurs/1
   # GET /dinosaurs/1.json
   def show
-    render json: @dinosaur
+    expose @dinosaur
   end
 
   # POST /dinosaurs
   # POST /dinosaurs.json
   def create
     @dinosaur = Dinosaur.new(dinosaur_params)
-
     if @dinosaur.save
-      render json: @dinosaur, status: :created, location: @dinosaur
+      expose @dinosaur, status: :created, location: @dinosaur
     else
-      render json: @dinosaur.errors, status: :unprocessable_entity
+      error! :invalid, metadata: @dinosaur
     end
   end
 
@@ -35,7 +34,7 @@ class DinosaursController < ApplicationController
     if @dinosaur.update(dinosaur_params)
       head :no_content
     else
-      render json: @dinosaur.errors, status: :unprocessable_entity
+      expose @dinosaur.errors, status: :unprocessable_entity
     end
   end
 
@@ -49,11 +48,11 @@ class DinosaursController < ApplicationController
 
   private
 
-    def set_dinosaur
-      @dinosaur = Dinosaur.find(params[:id])
-    end
+  def set_dinosaur
+    @dinosaur = Dinosaur.find(params[:id])
+  end
 
-    def dinosaur_params
-      params.require(:dinosaur).permit(:name)
-    end
+  def dinosaur_params
+    params.require(:dinosaur).permit(:name)
+  end
 end
