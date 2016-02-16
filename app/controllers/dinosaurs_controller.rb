@@ -22,7 +22,11 @@ class DinosaursController < ApplicationController
     if @dinosaur.save
       expose @dinosaur, status: :created, location: @dinosaur
     else
-      error! :invalid, metadata: @dinosaur
+      if @dinosaur.errors.full_messages.include?('Name has already been taken')
+        error! :conflict, metadata: {name_already_taken: @dinosaur.name}
+      else
+        error! :invalid, @cage.errors, metadata: @dinosaur
+      end
     end
   end
 
@@ -53,6 +57,6 @@ class DinosaursController < ApplicationController
   end
 
   def dinosaur_params
-    params.require(:dinosaur).permit(:name)
+    params.require(:dinosaur).permit(:name, :species)
   end
 end
