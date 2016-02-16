@@ -23,7 +23,7 @@ class CagesController < ApplicationController
     if @cage.save
       expose @cage, status: :created, location: @cage
     else
-      expose @cage.errors, status: :unprocessable_entity
+      error!(:invalid_resource, @cage.errors)
     end
   end
 
