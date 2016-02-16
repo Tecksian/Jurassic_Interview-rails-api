@@ -76,8 +76,6 @@
     
     <li ><a href="#method-i-index">#index</a>
     
-    <li ><a href="#method-i-show">#show</a>
-    
     <li ><a href="#method-i-to_cage">#to_cage</a>
     
     <li ><a href="#method-i-update">#update</a>
@@ -135,7 +133,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@dinosaur</span> = <span class="ruby-constant">Dinosaur</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dinosaur_params</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">save</span>
@@ -177,7 +175,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 68</span>
+            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">destroy</span>
 
@@ -228,39 +226,6 @@
       </div>
 
     
-      <div id="method-i-show" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">show</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>GET /dinosaurs/1 GET /dinosaurs/1.json</p>
-          
-          
-
-          
-          <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 14</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-  <span class="ruby-identifier">expose</span> <span class="ruby-ivar">@dinosaur</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-to_cage" class="method-detail ">
         
         <div class="method-heading">
@@ -274,13 +239,13 @@
 
         <div class="method-description">
           
-          
+          <p>PUT /dinosaurs/cage</p>
           
           
 
           
           <div class="method-source-code" id="to_cage-source">
-            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 18</span>
+            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_cage</span>
   <span class="ruby-ivar">@cage</span> = <span class="ruby-constant">Cage</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">cage_params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-comment"># As we&#39;re using validation on the Cage model to check for error</span>
@@ -329,7 +294,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 56</span>
+            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-ivar">@dinosaur</span> = <span class="ruby-constant">Dinosaur</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 

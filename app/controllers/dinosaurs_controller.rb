@@ -10,11 +10,12 @@ class DinosaursController < ApplicationController
   end
 
   # GET /dinosaurs/1
-  # GET /dinosaurs/1.json
-  def show
-    expose @dinosaur
-  end
+  # # GET /dinosaurs/1.json
+  # def show
+  #   expose @dinosaur
+  # end
 
+  # PUT /dinosaurs/cage
   def to_cage
     @cage = Cage.find(cage_params[:id])
     # As we're using validation on the Cage model to check for error
