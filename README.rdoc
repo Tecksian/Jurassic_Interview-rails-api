@@ -1,11 +1,15 @@
 == README
+=Version 0, or 'open alpha'....
+Jurassic Interview open-alpha! Dinosaurs? YES! Cages? YES! Overcrowded cages, dinos in unpowered cages, dinos eating each other? Um, well, yeah. But your participation in this open alpha is crucial to knowing what we need to include in the release-day patch!
 
-* INITIAL NOTES
+= INITIAL NOTES
 For simplicity's sake, I'm not implementing two elements that I typically would:
 
 1) a custom api namespace: Normally I'd do this so that api paths went like /api/dinosaurs/etc..., to preserve the ability to make standard view-based pages accessible for a user interface. It also helps with versioning, which brings us to:
 
 2) versioning. Especially with apis, you'd want to make sure you have different modules, namespaces, etc for your versioning your controllers. However, in the simple model case like this interview, it seems excessive.
+
+= Developing thoughts
 
 * On testing
 We are unusually, but deliberately, including only the barest testing for the base models.
@@ -23,3 +27,9 @@ We intend to implement most of the business logic at the model level. More on th
 
 * On shuffling and testing
 We like it! Shuffling isn't randomizing, but that's good because it helps get more complete coverage. It can cause debugging to be more problematic, but this is avoidable via the use of specific random seeds.
+
+* On completion time
+Please note the huge time difference between batches of github commits. Sticking to the 5 hour limit, just didn't do it in one sitting.
+
+* On releases
+Why do two releases for such a simple project? To illustrate my general approach of basic-working-tested->release_basic->advanced_stuff, testing, etc-> more useful releases
