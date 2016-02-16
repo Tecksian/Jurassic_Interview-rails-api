@@ -1,28 +1,25 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* INITIAL NOTES
+For simplicity's sake, I'm not implementing two elements that I typically would:
 
-Things you may want to cover:
+1) a custom api namespace: Normally I'd do this so that api paths went like /api/dinosaurs/etc..., to preserve the ability to make standard view-based pages accessible for a user interface. It also helps with versioning, which brings us to:
 
-* Ruby version
+2) versioning. Especially with apis, you'd want to make sure you have different modules, namespaces, etc for your versioning your controllers. However, in the simple model case like this interview, it seems excessive.
 
-* System dependencies
+* On testing
+We are unusually, but deliberately, including only the barest testing for the base models.
+This is not reflective of my design philosophy -- which is *almost* that thorough testing helps me understand the app as much as it helps reliability for users.
+However, given the time limit, the simplicty of these models, and the fact that the project description specified only tests for the business logic, we skimp on the basics.
 
-* Configuration
+In fact, I admire and often employ the development approach of writing the tests first. Sure, they all fail, but it helps with so many things -- not the least of which is scope creep.
+Sad Panda.
 
-* Database creation
+* On documentation
+I prefer to document as I go along. Typically I revise often, but in this case a 'stream of consciousness' style README might help give insight into my development mindset/approach/etc.
 
-* Database initialization
+* On general approach
+We intend to implement most of the business logic at the model level. More on this to come, but there are advantages to letting the Ruby framework do the heavy lifting for us..
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* On shuffling and testing
+We like it! Shuffling isn't randomizing, but that's good because it helps get more complete coverage. It can cause debugging to be more problematic, but this is avoidable via the use of specific random seeds.
