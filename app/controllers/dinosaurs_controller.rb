@@ -31,11 +31,16 @@ class DinosaursController < ApplicationController
     end
 
     if @dinosaur.save
-      expose @dinosaur
+      expose @dinosaur, status: :created, location: @dinosaur
     else
-      error!(:invalid_resource, @dinosaur.errors)
+      if @dinosaur.errors.full_messages.include?('Name has already been taken')
+        error! :conflict, metadata: {name_already_taken: @dinosaur.name}
+      else
+        error! :unprocessable_entity, @cage.errors, metadata: @dinosaur
+      end
     end
   end
+
 
   # PATCH/PUT /dinosaurs/1
   # PATCH/PUT /dinosaurs/1.json
@@ -103,9 +108,8 @@ class DinosaursController < ApplicationController
   end
 
   def get_species
-    find_name = (@dinosaur.species_name || species_params[:name])
-    @dinosaur.species = Species.find_by_name!(find_name)
-    @dinosaur.species_name
+    find_name = (dinosaur_params[:species_name] || species_params[:name])
+    @dinosaur.species_id = Species.find_by_name!(find_name).id
   rescue Exception => e
     @dinosaur.errors.add(e.message, find_name)
     error! :invalid_resource, @dinosaur.errors
