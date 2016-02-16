@@ -5,6 +5,8 @@ class Cage < ActiveRecord::Base
 
   has_many :dinosaurs, inverse_of: :cage, validate: :true
 
+  attr_reader :current_occupancy
+
   def attributes
     {id: nil, max_occupancy: 5, powered_up: true, current_occupancy: self.current_occupancy}
   end
