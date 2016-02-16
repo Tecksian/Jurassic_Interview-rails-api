@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216191930) do
+ActiveRecord::Schema.define(version: 20160216200150) do
 
   create_table "cages", force: :cascade do |t|
     t.integer  "max_occupancy"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(version: 20160216191930) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "species", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "is_carnivore"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
 end
