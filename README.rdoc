@@ -15,6 +15,14 @@ However, given the time limit, the simplicty of these models, and the fact that 
 In fact, I admire and often employ the development approach of writing the tests first. Sure, they all fail, but it helps with so many things -- not the least of which is scope creep.
 Sad Panda.
 
+* On ease of use
+We've done some things not listed in the requirements or business logic, because they illustrate our typical approach.
+
+For example, serializing the JSON and (planning to) allow the user to do queries with a non-nested request are both things that take time but weren't required. However, we believe that the 'principle of least surprise' is sometimes best achieved via lessening complexity.
+
+In the end, we don't want to be 'that guy' that responds to users with: "Well, you forgot to wave your left hand above your head after the 18th step in the dance."
+
+
 * On documentation
 I prefer to document as I go along. Typically I revise often, but in this case a 'stream of consciousness' style README might help give insight into my development mindset/approach/etc.
 
