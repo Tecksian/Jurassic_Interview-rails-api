@@ -3,26 +3,37 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.5.1'
 
-gem 'rails-api'
+gem 'rails-api', '0.4.0' #specifying versions is good for avoiding surprises!
 
-gem 'spring', :group => :development
-
-
-gem 'sqlite3'
+# Not needed for a model project, and can sometimes cause errors with RSpec+FactoryGirl
+# gem 'spring', :group => :development
 
 
+gem 'sqlite3' #then again, that's what Gemfile.lock is for!
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# GEMs I'm adding
 
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
+# WEBrick and Windows play nicely if we include this (otherwise error trying to find timezone info -- yet
+# using timezones and localization still requires other steps. Hooray? :P)
+gem 'tzinfo-data' , platforms: [:mingw, :mswin, :x64_mingw]
 
-# Use unicorn as the app server
-# gem 'unicorn'
+# because versioning is important, and Versionist is simpler than RocketPants
+# however, not using versions for this project -- see README for why.
+#gem 'versionist'
 
-# Deploy with Capistrano
-# gem 'capistrano', :group => :development
+# RocketPants has some nice JSON features I've always wanted to try out, so....
+gem 'rocket_pants'
 
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+# rspec for testing ease
+gem 'rspec'
+gem 'rspec-rails'
+
+# Factory Girl (because fixing fixtures is a pain)
+gem 'factory_girl'
+gem 'factory_girl_rails', require: false
+
+group :doc do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'sdoc', require: false
+  gem 'redcarpet', '~> 3.1.2'
+end
