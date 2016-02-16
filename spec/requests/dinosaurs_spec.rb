@@ -10,7 +10,7 @@ RSpec.describe "Dinosaurs", type: :request do
     #Default create_list size.
     let!(:dino_list_size) {5}
     #create the list...
-    let!(:dinosaur_list) {FactoryGirl.create_list(:dinosaur, dino_list_size)}
+    let!(:dinosaur_list) {create_list(:dinosaur, dino_list_size)}
 
     before do
       # look for the list...
@@ -38,14 +38,14 @@ RSpec.describe "Dinosaurs", type: :request do
   # Can the api create its own dinosaurs?
   describe "POST /dinosaurs.json" do
     # a lone dinosaur for testing...not a JSON one -- yet. Useful to have original around.
-    let!(:single_dinosaur) { FactoryGirl.build(:dinosaur) }
+    let!(:single_dinosaur) { build(:dinosaur) }
     # adding the root: true because I believe it's more robust and secure
     # (even though RocketPants doesn't like it)
     let!(:single_json_dinosaur) { single_dinosaur.as_json(root: true) }
     # dinosaurs should have names...let's make sure they must.
-    let!(:single_nameless_json_dinosaur) { FactoryGirl.build(:dinosaur, name: nil).as_json(root: true) }
+    let!(:single_nameless_json_dinosaur) { build(:dinosaur, name: nil).as_json(root: true) }
     # while we're at it, make sure the name uniqueness constraint works, too....
-    let!(:single_imposter_dinosaur) { FactoryGirl.build(:dinosaur, name: single_dinosaur.name) }
+    let!(:single_imposter_dinosaur) { build(:dinosaur, name: single_dinosaur.name) }
 
     before(:each) do
       post dinosaurs_path, single_json_dinosaur
@@ -76,4 +76,5 @@ RSpec.describe "Dinosaurs", type: :request do
     end
   end
 
+  #TODO: Add PUT tests to make sure species and it's attributes can't be changed for a dinosaur,but dino name can.
 end

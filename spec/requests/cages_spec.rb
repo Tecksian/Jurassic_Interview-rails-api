@@ -1,5 +1,4 @@
-require 'rails_helper'
-require 'spec_helper'
+require 'rspec'
 
 # NOTE: As mentioned in the readme, making only the barest-bones unit tests that don't involve the
 # business logic. Could be refactored and DRY-ed up a great deal.
@@ -52,4 +51,5 @@ RSpec.describe "Cages", type: :request do
 
   end
 
+  #TODO PUT tests to flip the power on and off.
 end
