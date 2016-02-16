@@ -25,7 +25,7 @@ class DinosaursController < ApplicationController
       if @dinosaur.errors.full_messages.include?('Name has already been taken')
         error! :conflict, metadata: {name_already_taken: @dinosaur.name}
       else
-        error! :invalid, @cage.errors, metadata: @dinosaur
+        error! :unprocessable_entity, @cage.errors, metadata: @dinosaur
       end
     end
   end
@@ -57,6 +57,6 @@ class DinosaursController < ApplicationController
   end
 
   def dinosaur_params
-    params.require(:dinosaur).permit(:name, :species)
+    params.require(:dinosaur).permit(:name)
   end
 end
