@@ -5,4 +5,6 @@ class Species < ActiveRecord::Base
   # are *intended* to be made to it, it's useful for helping us find our own
   # errors.
   validates :name, presence: :true, uniqueness: :true
+
+  has_many :dinosaurs, inverse_of: :species
 end

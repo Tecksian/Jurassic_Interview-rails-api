@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216200150) do
+ActiveRecord::Schema.define(version: 20160216201525) do
 
   create_table "cages", force: :cascade do |t|
     t.integer  "max_occupancy"
@@ -24,7 +24,12 @@ ActiveRecord::Schema.define(version: 20160216200150) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "species_id"
+    t.integer  "cage_id"
   end
+
+  add_index "dinosaurs", ["cage_id"], name: "index_dinosaurs_on_cage_id"
+  add_index "dinosaurs", ["species_id"], name: "index_dinosaurs_on_species_id"
 
   create_table "species", force: :cascade do |t|
     t.string   "name"

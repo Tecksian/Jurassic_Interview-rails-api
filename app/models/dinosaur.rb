@@ -6,5 +6,7 @@ class Dinosaur < ActiveRecord::Base
             # is name+species being unique (otherwise nonsense ensues -- in business use, not only code).
             # We choose the easier of the two implied options, if only to avoid sitcom-like confusion!
             uniqueness: true
+
+  belongs_to :species, inverse_of: :dinosaurs, validate: true
 end
 
