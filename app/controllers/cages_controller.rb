@@ -11,9 +11,9 @@ class CagesController < ApplicationController
 
   # GET /cages/1
   # GET /cages/1.json
-  def show
-    expose @cage
-  end
+  # def show
+  #   expose @cage
+  # end
 
   # POST /cages
   # POST /cages.json

@@ -7,4 +7,8 @@ class Species < ActiveRecord::Base
   validates :name, presence: :true, uniqueness: :true
 
   has_many :dinosaurs, inverse_of: :species
+
+  def attributes
+    {name: nil, is_carnivore: nil}
+  end
 end

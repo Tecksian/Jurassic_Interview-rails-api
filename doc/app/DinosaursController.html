@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>class DinosaursController - Rails Application Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-create">#create</a>
+    
+    <li ><a href="#method-i-destroy">#destroy</a>
+    
+    <li ><a href="#method-i-index">#index</a>
+    
+    <li ><a href="#method-i-to_cage">#to_cage</a>
+    
+    <li ><a href="#method-i-update">#update</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-DinosaursController">
+  <h1 id="class-DinosaursController" class="class">
+    class DinosaursController
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-create" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>POST /dinosaurs POST /dinosaurs.json</p>
+          
+          
+
+          
+          <div class="method-source-code" id="create-source">
+            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@dinosaur</span> = <span class="ruby-constant">Dinosaur</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dinosaur_params</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-identifier">expose</span> <span class="ruby-ivar">@dinosaur</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@dinosaur</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">full_messages</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;Name has already been taken&#39;</span>)
+      <span class="ruby-identifier">error!</span> <span class="ruby-value">:conflict</span>, <span class="ruby-identifier">metadata</span><span class="ruby-operator">:</span> {<span class="ruby-identifier">name_already_taken</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">name</span>}
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">error!</span> <span class="ruby-value">:unprocessable_entity</span>, <span class="ruby-ivar">@cage</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">metadata</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@dinosaur</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-destroy" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">destroy</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>DELETE /dinosaurs/1 DELETE /dinosaurs/1.json</p>
+          
+          
+
+          
+          <div class="method-source-code" id="destroy-source">
+            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
+  <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">destroy</span>
+
+  <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">index</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /dinosaurs GET /dinosaurs.json</p>
+          
+          
+
+          
+          <div class="method-source-code" id="index-source">
+            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-ivar">@dinosaurs</span> = <span class="ruby-constant">Dinosaur</span>.<span class="ruby-identifier">all</span>
+
+  <span class="ruby-identifier">expose</span> <span class="ruby-ivar">@dinosaurs</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_cage" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_cage</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>PUT /dinosaurs/cage</p>
+          
+          
+
+          
+          <div class="method-source-code" id="to_cage-source">
+            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_cage</span>
+  <span class="ruby-ivar">@cage</span> = <span class="ruby-constant">Cage</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">cage_params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-comment"># As we&#39;re using validation on the Cage model to check for error</span>
+  <span class="ruby-comment"># conditions, we cannot simply do either:</span>
+  <span class="ruby-comment">#   @dinosaur.cage = @cage as this would not update the cage&#39;s number of dinosaurs until after @dinosaur is saved,</span>
+  <span class="ruby-comment">#   @cage.dinosaurs &lt;&lt; @dinosaur as this would autosave the dinosaur before running Cage validations.</span>
+  <span class="ruby-comment"># Instead, we need to add @dinosaur to the Cage&#39;s associaton proxy</span>
+  <span class="ruby-ivar">@cage</span>.<span class="ruby-identifier">dinosaurs</span>(<span class="ruby-keyword">true</span>).<span class="ruby-identifier">target</span>.<span class="ruby-identifier">append</span>(<span class="ruby-ivar">@dinosaur</span>)
+
+  <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">cage_id</span>=<span class="ruby-ivar">@cage</span>.<span class="ruby-identifier">id</span>
+  <span class="ruby-comment">#run the cage validations to make sure the dinosaur can go into the cage</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@cage</span>.<span class="ruby-identifier">invalid?</span>
+    <span class="ruby-identifier">error!</span>(<span class="ruby-value">:invalid_resource</span>, <span class="ruby-ivar">@cage</span>.<span class="ruby-identifier">errors</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-identifier">expose</span> <span class="ruby-ivar">@dinosaur</span>, {<span class="ruby-identifier">root</span><span class="ruby-operator">:</span> <span class="ruby-value">:true</span>, <span class="ruby-identifier">except</span><span class="ruby-operator">:</span> [<span class="ruby-value">:created_at</span>, <span class="ruby-value">:updated_at</span>]}
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">error!</span>(<span class="ruby-value">:invalid_resource</span>, <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">errors</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-update" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>PATCH/PUT /dinosaurs/1 PATCH/PUT /dinosaurs/1.json</p>
+          
+          
+
+          
+          <div class="method-source-code" id="update-source">
+            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
+  <span class="ruby-ivar">@dinosaur</span> = <span class="ruby-constant">Dinosaur</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">dinosaur_params</span>)
+    <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">expose</span> <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
