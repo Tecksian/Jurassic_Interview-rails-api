@@ -22,5 +22,16 @@ module JurassicInterviewRailsApi
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Preventing automatic test/spec generation. NOTE: This is because we're going to use
+    # request specs as a full-stack testing mechanism
+    config.generators do |g|
+      g.view_specs false
+      g.helper_specs false
+      g.controller_specs false
+      g.model_specs false
+      g.routing_specs false
+    end
+
   end
 end
