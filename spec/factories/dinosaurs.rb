@@ -6,5 +6,7 @@ FactoryGirl.define do
   factory :dinosaur do
     # sequences are good for avoiding unique constraints!
     sequence(:name){ |index| "Testasaurus-#{index}"}
+
+    species { attributes_for(:species)[:id] }
   end
 end
