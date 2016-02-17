@@ -2,6 +2,7 @@
 class Cage < ActiveRecord::Base
   #define a scope for simpler filtering/querying
   scope :cage_status_filter, -> (p_status) {where(powered_up: self.status_hash[p_status])}
+
   #make sure max_occupancy is a positive integer
   validates :max_occupancy, presence: true, numericality: { only_integer: true, greater_than: 0 }
   # many validations don't need to be performed if the cage is empty
