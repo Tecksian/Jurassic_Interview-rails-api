@@ -4,8 +4,11 @@ class CagesController < ApplicationController
   # GET /cages
   # GET /cages.json
   def index
-    @cages = Cage.all
-
+    if params[:status].nil?
+      @cages = Cage.all
+    else
+      @cages = Cage.cage_status_filter(params[:status])
+    end
     expose @cages
   end
 
