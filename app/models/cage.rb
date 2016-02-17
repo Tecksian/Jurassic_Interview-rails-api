@@ -88,4 +88,22 @@ class Cage < ActiveRecord::Base
       @carnivores.push(dino_species) if dino_species.species.is_carnivore
     end
   end
+
+  def status
+    @status = self.class.powered_hash[powered_up]
+  end
+
+  def status=(power_status)
+    self.powered_up=self.class.status_hash[power_status]
+  end
+
+  #avoid having to type "ACTIVE" and/or "INACTIVE" a bazillion times...
+  def self.status_hash
+    @status_hash={"ACTIVE"=> true, "INACTIVE"=> false}
+  end
+
+  def self.powered_hash
+    @powered_hash = {true => "ACTIVE", false => "INACTIVE", nil => "INACTIVE"}
+  end
+
 end
