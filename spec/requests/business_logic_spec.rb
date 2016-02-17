@@ -8,7 +8,7 @@ RSpec.describe "Dinosaurs", type: :request do
   describe "PUT /dinosaurs/cage" do
     let!(:test_cage_size) {3}
     # a lone dinosaur for testing...not a JSON one -- yet. Useful to have original around.
-    let!(:single_dinosaur) { create(:dinosaur) }
+    let!(:single_dinosaur) { create(:dinosaur, :herbivore) }
     # adding the root: true because I believe it's more robust and secure
     # (even though RocketPants doesn't like it)
     let!(:single_json_dinosaur) { single_dinosaur.as_json(root: true, include: [:species, :cage]) }
@@ -39,6 +39,15 @@ RSpec.describe "Dinosaurs", type: :request do
       expect(JSON.parse(response.body)['messages']['current_occupancy']).to eq(['Cage is full -- cannot add another dinosaur'])
     end
 
+    it "prevents adding a dinosaur to a cage that is powered down" do
+      test_cage_off = create(:cage, powered_up: false)
+      assign_cage(single_dinosaur, test_cage_off)
+      put to_cage_dinosaurs_path, single_dinosaur.as_json(root: true, include:[:species, :cage]), format: :json
+
+      expect(response).to have_http_status 422
+      expect(JSON.parse(response.body)['messages']['powered_up']).to \
+        eq(["Cannot have a dinosaur in a cage that is powered off. "])
+    end
 
     describe "check Cages for invalid species mixes" do
       let!(:single_herbivore) {create(:dinosaur, :herbivore)}
