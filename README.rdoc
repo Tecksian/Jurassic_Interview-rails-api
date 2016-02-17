@@ -2,13 +2,35 @@
 =Version 0, or 'open alpha'....
 Jurassic Interview open-alpha! Dinosaurs? YES! Cages? YES! Overcrowded cages, dinos in unpowered cages, dinos eating each other? Um, well, yeah. But your participation in this open alpha is crucial to knowing what we need to include in the release-day patch!
 
+= Version 1, or 'pretty sure it works'...
+Dinosaurs? YES! Cages? Yes! Dinosaurs running loose, and unavoidably fighting and/or eating each other due to your inability to intelligently query and assign your assets? Not so much. Sorry, folks -- liability insurance was the end of the carnage you enjoyed in the open alpha...
+
+= What you asked me to comment on:
+
+* On multi-threading
+By design, the vast majority of the validation and logic is already concentrated in the models, which is helpful. But not nearly sufficient -- in a multi-threaded environment, I would change the validations to employ class methods and variables, rather than instance methods/variables. This would allow us to employ a useful @@lock = Mutex new to keep things in order. Alternatively, or more likely in addition to,  if were truly incredible resource demands then I might employ a queuing system in ApplicationController.
+
+* On this test
+Fantastic test. Easily both the best and my favorite among the programming excercises I've experienced to date. Fun, deceptively simple, and one must fight the urge to both 1)build more than is needed (a little guilty myself, here) and 2) go back and redo it when you realize the way you *should* have done it!
+
+* On unfinished business requirements
+I believe I got them all. However, given (not much) more time I would've strongly preferred to implement an 'easy button' cage assignment method. Givenn the limited restrictions, it should be straightforward. And both the operators oand the users' lives are improved by being able to say 'put this dinosaur in a cage' rather than 'put this dinosaur in that cage'. On a more technical level, I would've preferred to implement a single filter mechanism in ActionController which the descendant controllers can call, but there wasn't time.
+
+= What you didn't ask me to comment on, but I'm commenting on it anyways
+
 = INITIAL NOTES
+
 For simplicity's sake, I'm not implementing two elements that I typically would:
 
 1) a custom api namespace: Normally I'd do this so that api paths went like /api/dinosaurs/etc..., to preserve the ability to make standard view-based pages accessible for a user interface. It also helps with versioning, which brings us to:
 
 2) versioning. Especially with apis, you'd want to make sure you have different modules, namespaces, etc for your versioning your controllers. However, in the simple model case like this interview, it seems excessive.
 
+
+* On tone
+Our tone in this document (aside from the 'Royal We' that I can't seem to shake from academic writing) is jovial. I tend towards this in excercises and interviews at baseline, as it gives a better indication of what it's like to work with me.
+
+However -- given the humor and whimsy in both the job description (artisan coffee, whiteboards, etc) and the excercise itself I felt especially bold in that respect.
 = Developing thoughts
 
 * On testing
@@ -26,18 +48,21 @@ For example, serializing the JSON and (planning to) allow the user to do queries
 
 In the end, we don't want to be 'that guy' that responds to users with: "Well, you forgot to wave your left hand above your head after the 18th step in the dance."
 
-
 * On documentation
 I prefer to document as I go along. Typically I revise often, but in this case a 'stream of consciousness' style README might help give insight into my development mindset/approach/etc.
 
 * On general approach
-We intend to implement most of the business logic at the model level. More on this to come, but there are advantages to letting the Ruby framework do the heavy lifting for us..
+We intend to implement most of the business logic at the model level. There are numerous advantages to this -- which motivated the classic Ruby advice 'fat model, skinny controller'
 
 * On shuffling and testing
 We like it! Shuffling isn't randomizing, but that's good because it helps get more complete coverage. It can cause debugging to be more problematic, but this is avoidable via the use of specific random seeds.
 
 * On completion time
-Please note the huge time difference between batches of github commits. Sticking to the 5 hour limit, just didn't do it in one sitting.
+Please note the huge time difference between batches of github commits. Though I was attempting to sticking to the 5 hour limit, it's possible-to-likely I went over it simply because it's harder to track time spend when you are occasionally interrupted by a wonderful but ranmbunctious pair of children...especially when they are your own, so it would be illegal to ignore them.
 
+ALSO: Writing the documentation as I went on was a large chunk out of the time. Our preference is to document as we go (here done often in the comments), rather than build until you're done and *then* (complain while) tending to the documentation.
 * On releases
-Why do two releases for such a simple project? To illustrate my general approach of basic-working-tested->release_basic->advanced_stuff, testing, etc-> more useful releases
+Why do two releases for such a simple project? To illustrate my general approach of basic-working-tested->release_basic->advanced_stuff, testing, etc-> more useful releases.
+
+* On comments
+For these sorts of excercises, we enjoy explaining more than just the bare descriptions for use by automatic document generators. For rease of reading, I'll compile a list of the longer comments. Please be assured, however, that in a professional environment I don't spam the comments the way I do here.

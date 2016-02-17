@@ -57,6 +57,9 @@
   <ul class="link-list" role="directory">
     <li><a href="#label-README">README</a>
     <li><a href="#label-Version+0-2C+or+-27open+alpha-27....">Version 0, or &#39;open alpha&#39;.…</a>
+    <li><a href="#label-Version+1-2C+or+-27pretty+sure+it+works-27...">Version 1, or &#39;pretty sure it works&#39;…</a>
+    <li><a href="#label-What+you+asked+me+to+comment+on-3A">What you asked me to comment on:</a>
+    <li><a href="#label-What+you+didn-27t+ask+me+to+comment+on-2C+but+I-27m+commenting+on+it+anyways">What you didn&#39;t ask me to comment on, but I&#39;m commenting on it anyways</a>
     <li><a href="#label-INITIAL+NOTES">INITIAL NOTES</a>
     <li><a href="#label-Developing+thoughts">Developing thoughts</a>
   </ul>
@@ -88,6 +91,51 @@ cages, dinos in unpowered cages, dinos eating each other? Um, well, yeah.
 But your participation in this open alpha is crucial to knowing what we
 need to include in the release-day patch!</p>
 
+<h1 id="label-Version+1-2C+or+-27pretty+sure+it+works-27...">Version 1, or &#39;pretty sure it works&#39;…<span><a href="#label-Version+1-2C+or+-27pretty+sure+it+works-27...">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Dinosaurs? YES! Cages? Yes! Dinosaurs running loose, and unavoidably
+fighting and/or eating each other due to your inability to intelligently
+query and assign your assets? Not so much. Sorry, folks – liability
+insurance was the end of the carnage you enjoyed in the open alpha…</p>
+
+<h1 id="label-What+you+asked+me+to+comment+on-3A">What you asked me to comment on:<span><a href="#label-What+you+asked+me+to+comment+on-3A">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<ul><li>
+<p>On multi-threading</p>
+</li></ul>
+
+<p>By design, the vast majority of the validation and logic is already
+concentrated in the models, which is helpful. But not nearly sufficient –
+in a multi-threaded environment, I would change the validations to employ
+class methods and variables, rather than instance methods/variables. This
+would allow us to employ a useful @@lock = Mutex new to keep things in
+order. Alternatively, or more likely in addition to,  if were truly
+incredible resource demands then I might employ a queuing system in <a
+href="ApplicationController.html">ApplicationController</a>.</p>
+<ul><li>
+<p>On this test</p>
+</li></ul>
+
+<p>Fantastic test. Easily both the best and my favorite among the programming
+excercises I&#39;ve experienced to date. Fun, deceptively simple, and one
+must fight the urge to both 1)build more than is needed (a little guilty
+myself, here) and 2) go back and redo it when you realize the way you
+<strong>should</strong> have done it!</p>
+<ul><li>
+<p>On unfinished business requirements</p>
+</li></ul>
+
+<p>I believe I got them all. However, given (not much) more time I
+would&#39;ve strongly preferred to implement an &#39;easy button&#39; cage
+assignment method. Givenn the limited restrictions, it should be
+straightforward. And both the operators oand the users&#39; lives are
+improved by being able to say &#39;put this dinosaur in a cage&#39; rather
+than &#39;put this dinosaur in that cage&#39;. On a more technical level, I
+would&#39;ve preferred to implement a single filter mechanism in
+ActionController which the descendant controllers can call, but there
+wasn&#39;t time.</p>
+
+<h1 id="label-What+you+didn-27t+ask+me+to+comment+on-2C+but+I-27m+commenting+on+it+anyways">What you didn&#39;t ask me to comment on, but I&#39;m commenting on it anyways<span><a href="#label-What+you+didn-27t+ask+me+to+comment+on-2C+but+I-27m+commenting+on+it+anyways">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
 <h1 id="label-INITIAL+NOTES">INITIAL NOTES<span><a href="#label-INITIAL+NOTES">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p>For simplicity&#39;s sake, I&#39;m not implementing two elements that I
@@ -101,6 +149,18 @@ versioning, which brings us to:</p>
 <p>2) versioning. Especially with apis, you&#39;d want to make sure you have
 different modules, namespaces, etc for your versioning your controllers.
 However, in the simple model case like this interview, it seems excessive.</p>
+<ul><li>
+<p>On tone</p>
+</li></ul>
+
+<p>Our tone in this document (aside from the &#39;Royal We&#39; that I
+can&#39;t seem to shake from academic writing) is jovial. I tend towards
+this in excercises and interviews at baseline, as it gives a better
+indication of what it&#39;s like to work with me.</p>
+
+<p>However – given the humor and whimsy in both the job description (artisan
+coffee, whiteboards, etc) and the excercise itself I felt especially bold
+in that respect.</p>
 
 <h1 id="label-Developing+thoughts">Developing thoughts<span><a href="#label-Developing+thoughts">&para;</a> <a href="#top">&uarr;</a></span></h1>
 <ul><li>
@@ -118,6 +178,21 @@ specified only tests for the business logic, we skimp on the basics.</p>
 tests first. Sure, they all fail, but it helps with so many things – not
 the least of which is scope creep. Sad Panda.</p>
 <ul><li>
+<p>On ease of use</p>
+</li></ul>
+
+<p>We&#39;ve done some things not listed in the requirements or business
+logic, because they illustrate our typical approach.</p>
+
+<p>For example, serializing the JSON and (planning to) allow the user to do
+queries with a non-nested request are both things that take time but
+weren&#39;t required. However, we believe that the &#39;principle of least
+surprise&#39; is sometimes best achieved via lessening complexity.</p>
+
+<p>In the end, we don&#39;t want to be &#39;that guy&#39; that responds to
+users with: “Well, you forgot to wave your left hand above your head after
+the 18th step in the dance.”</p>
+<ul><li>
 <p>On documentation</p>
 </li></ul>
 
@@ -129,9 +204,9 @@ development mindset/approach/etc.</p>
 <p>On general approach</p>
 </li></ul>
 
-<p>We intend to implement most of the business logic at the model level. More
-on this to come, but there are advantages to letting the Ruby framework do
-the heavy lifting for us..</p>
+<p>We intend to implement most of the business logic at the model level. There
+are numerous advantages to this – which motivated the classic Ruby advice
+&#39;fat model, skinny controller&#39;</p>
 <ul><li>
 <p>On shuffling and testing</p>
 </li></ul>
@@ -144,14 +219,32 @@ problematic, but this is avoidable via the use of specific random seeds.</p>
 </li></ul>
 
 <p>Please note the huge time difference between batches of github commits.
-Sticking to the 5 hour limit, just didn&#39;t do it in one sitting.</p>
+Though I was attempting to sticking to the 5 hour limit, it&#39;s
+possible-to-likely I went over it simply because it&#39;s harder to track
+time spend when you are occasionally interrupted by a wonderful but
+ranmbunctious pair of children…especially when they are your own, so it
+would be illegal to ignore them.</p>
+
+<p>ALSO: Writing the documentation as I went on was a large chunk out of the
+time. Our preference is to document as we go (here done often in the
+comments), rather than build until you&#39;re done and
+<strong>then</strong> (complain while) tending to the documentation.</p>
 <ul><li>
 <p>On releases</p>
 </li></ul>
 
 <p>Why do two releases for such a simple project? To illustrate my general
 approach of basic-working-tested-&gt;release_basic-&gt;advanced_stuff,
-testing, etc-&gt; more useful releases</p>
+testing, etc-&gt; more useful releases.</p>
+<ul><li>
+<p>On comments</p>
+</li></ul>
+
+<p>For these sorts of excercises, we enjoy explaining more than just the bare
+descriptions for use by automatic document generators. For rease of
+reading, I&#39;ll compile a list of the longer comments. Please be assured,
+however, that in a professional environment I don&#39;t spam the comments
+the way I do here.</p>
 </main>
 
 

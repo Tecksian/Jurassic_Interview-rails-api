@@ -76,6 +76,8 @@
     
     <li ><a href="#method-i-index">#index</a>
     
+    <li ><a href="#method-i-show">#show</a>
+    
     <li ><a href="#method-i-to_cage">#to_cage</a>
     
     <li ><a href="#method-i-update">#update</a>
@@ -133,9 +135,13 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 42</span>
+            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@dinosaur</span> = <span class="ruby-constant">Dinosaur</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dinosaur_params</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">species_id</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">get_species</span>
+  <span class="ruby-keyword">end</span>
+
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">save</span>
     <span class="ruby-identifier">expose</span> <span class="ruby-ivar">@dinosaur</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@dinosaur</span>
   <span class="ruby-keyword">else</span>
@@ -175,10 +181,9 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 69</span>
+            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">destroy</span>
-
   <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -212,9 +217,47 @@
           <div class="method-source-code" id="index-source">
             <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 6</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-ivar">@dinosaurs</span> = <span class="ruby-constant">Dinosaur</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:species_name</span>].<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@dinosaurs</span> = <span class="ruby-constant">Dinosaur</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@dinosaurs</span> = <span class="ruby-constant">Species</span>.<span class="ruby-identifier">name_filter</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:species_name</span>]).<span class="ruby-identifier">joins</span> <span class="ruby-value">:dinosaurs</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment">#TODO generate errors for invalid parameters/valuies</span>
+  <span class="ruby-identifier">exposes</span> <span class="ruby-ivar">@dinosaurs</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
 
-  <span class="ruby-identifier">expose</span> <span class="ruby-ivar">@dinosaurs</span>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-show" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">show</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>GET /dinosaurs/1 GET /dinosaurs/1.json</p>
+          
+          
+
+          
+          <div class="method-source-code" id="show-source">
+            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-ivar">@dinosaur</span>=<span class="ruby-constant">Dinosaur</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-identifier">exposes</span> <span class="ruby-ivar">@dinosaur</span>, <span class="ruby-identifier">include</span><span class="ruby-operator">:</span> [<span class="ruby-value">:species</span>, <span class="ruby-value">:cage</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -245,22 +288,26 @@
 
           
           <div class="method-source-code" id="to_cage-source">
-            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 19</span>
+            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_cage</span>
-  <span class="ruby-ivar">@cage</span> = <span class="ruby-constant">Cage</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">cage_params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-ivar">@cage</span> = <span class="ruby-constant">Cage</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">cage_id</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">cage_params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-comment"># As we&#39;re using validation on the Cage model to check for error</span>
   <span class="ruby-comment"># conditions, we cannot simply do either:</span>
   <span class="ruby-comment">#   @dinosaur.cage = @cage as this would not update the cage&#39;s number of dinosaurs until after @dinosaur is saved,</span>
   <span class="ruby-comment">#   @cage.dinosaurs &lt;&lt; @dinosaur as this would autosave the dinosaur before running Cage validations.</span>
-  <span class="ruby-comment"># Instead, we need to add @dinosaur to the Cage&#39;s associaton proxy</span>
-  <span class="ruby-ivar">@cage</span>.<span class="ruby-identifier">dinosaurs</span>(<span class="ruby-keyword">true</span>).<span class="ruby-identifier">target</span>.<span class="ruby-identifier">append</span>(<span class="ruby-ivar">@dinosaur</span>)
+  <span class="ruby-comment">#   either the @dinosaur.build_cage or @cage.dinosaurs.build methods for assignment, as the virtual attributes</span>
+  <span class="ruby-comment">#   we define for easier user API calls and returns pose problems. Yet another reason why active_model_serializers</span>
+  <span class="ruby-comment">#   is far better than the serializable_hash - based foo Rails 4.2 put in (which am using, but shouldn&#39;t have!)</span>
+  <span class="ruby-comment"># Instead, we need to add @dinosaur to the Cage&#39;s associaton proxy. However, doing this means we need</span>
+  <span class="ruby-comment"># to guard against the case where someone is trying to assign the dinosaur to a cage it&#39;s already in.</span>
+  <span class="ruby-ivar">@cage</span>.<span class="ruby-identifier">dinosaurs</span>(<span class="ruby-keyword">true</span>).<span class="ruby-identifier">target</span>.<span class="ruby-identifier">append</span>(<span class="ruby-ivar">@dinosaur</span>) <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">cage_id</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@cage</span>.<span class="ruby-identifier">id</span>
 
-  <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">cage_id</span>=<span class="ruby-ivar">@cage</span>.<span class="ruby-identifier">id</span>
+  <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">cage</span>=<span class="ruby-ivar">@cage</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">cage_id</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-comment">#run the cage validations to make sure the dinosaur can go into the cage</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@cage</span>.<span class="ruby-identifier">invalid?</span>
     <span class="ruby-identifier">error!</span>(<span class="ruby-value">:invalid_resource</span>, <span class="ruby-ivar">@cage</span>.<span class="ruby-identifier">errors</span>)
   <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">save</span>
-    <span class="ruby-identifier">expose</span> <span class="ruby-ivar">@dinosaur</span>, {<span class="ruby-identifier">root</span><span class="ruby-operator">:</span> <span class="ruby-value">:true</span>, <span class="ruby-identifier">except</span><span class="ruby-operator">:</span> [<span class="ruby-value">:created_at</span>, <span class="ruby-value">:updated_at</span>]}
+    <span class="ruby-identifier">expose</span> <span class="ruby-ivar">@dinosaur</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">error!</span>(<span class="ruby-value">:invalid_resource</span>, <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">errors</span>)
   <span class="ruby-keyword">end</span>
@@ -294,14 +341,14 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 57</span>
+            <pre><span class="ruby-comment"># File app/controllers/dinosaurs_controller.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-ivar">@dinosaur</span> = <span class="ruby-constant">Dinosaur</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">dinosaur_params</span>)
     <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span>
+    <span class="ruby-identifier">expose</span> <span class="ruby-ivar">@dinosaur</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">expose</span> <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span>
+    <span class="ruby-identifier">error!</span>(<span class="ruby-value">:invalid_resource</span>, <span class="ruby-ivar">@dinosaur</span>.<span class="ruby-identifier">errors</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

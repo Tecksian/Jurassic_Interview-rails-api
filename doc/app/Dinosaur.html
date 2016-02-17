@@ -64,7 +64,17 @@
 
     
     
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-attributes">#attributes</a>
+    
+  </ul>
+</div>
+
   </div>
 </nav>
 
@@ -75,7 +85,11 @@
 
   <section class="description">
     
-<p>Right now, Dinosaurs only have a name.</p>
+<p><a href="Dinosaur.html">Dinosaur</a> class. Only fundamental attributes are
+name, cage_id, and species_id. Created method-based attributes for <a
+href="Dinosaur.html#attribute-i-species_name">#species_name</a>, <a
+href="Dinosaur.html#attribute-i-is_carnivore">#is_carnivore</a>, and
+allowed viewing of cage_id which is functionally similar to a cage number.</p>
 
   </section>
 
@@ -90,8 +104,83 @@
     
 
     
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-is_carnivore" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">is_carnivore</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-species_name" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">species_name</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section>
+    
 
     
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-attributes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">attributes</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>overloading attributes is the crux of ActiveModel::Serializers</p>
+          
+          
+
+          
+          <div class="method-source-code" id="attributes-source">
+            <pre><span class="ruby-comment"># File app/models/dinosaur.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">attributes</span>
+  {<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">species_name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">species_name</span>, <span class="ruby-identifier">is_carnivore</span><span class="ruby-operator">:</span> <span class="ruby-identifier">is_carnivore</span>, <span class="ruby-identifier">cage_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">cage_id</span>}
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
   </section>
 </main>
 

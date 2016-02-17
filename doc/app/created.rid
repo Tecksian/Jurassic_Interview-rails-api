@@ -1,8 +1,8 @@
-Tue, 16 Feb 2016 17:26:33 -0500
-README.rdoc	Tue, 16 Feb 2016 17:22:06 -0500
-app/controllers/application_controller.rb	Tue, 16 Feb 2016 13:34:28 -0500
-app/controllers/cages_controller.rb	Tue, 16 Feb 2016 17:26:30 -0500
-app/controllers/dinosaurs_controller.rb	Tue, 16 Feb 2016 17:26:30 -0500
-app/models/cage.rb	Tue, 16 Feb 2016 17:17:59 -0500
-app/models/dinosaur.rb	Tue, 16 Feb 2016 17:17:59 -0500
-app/models/species.rb	Tue, 16 Feb 2016 17:17:59 -0500
+Wed, 17 Feb 2016 00:24:09 -0500
+README.rdoc	Wed, 17 Feb 2016 00:24:06 -0500
+app/controllers/application_controller.rb	Tue, 16 Feb 2016 17:27:25 -0500
+app/controllers/cages_controller.rb	Tue, 16 Feb 2016 21:21:06 -0500
+app/controllers/dinosaurs_controller.rb	Tue, 16 Feb 2016 23:09:27 -0500
+app/models/cage.rb	Tue, 16 Feb 2016 23:37:00 -0500
+app/models/dinosaur.rb	Tue, 16 Feb 2016 22:47:22 -0500
+app/models/species.rb	Tue, 16 Feb 2016 23:09:27 -0500
