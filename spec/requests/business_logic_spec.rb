@@ -38,5 +38,52 @@ RSpec.describe "Dinosaurs", type: :request do
       expect(response).to have_http_status 422
       expect(JSON.parse(response.body)['messages']['current_occupancy']).to eq(['Cage is full -- cannot add another dinosaur'])
     end
+
+
+    describe "check Cages for invalid species mixes" do
+      let!(:single_herbivore) {create(:dinosaur, :herbivore)}
+      let!(:single_caged_herbivore) { assign_cage(single_herbivore, test_cage_on) }
+      let!(:single_carnivore) {create(:dinosaur, :carnivore)}
+      let!(:single_caged_carnivore) {assign_cage(single_carnivore, test_cage_on)}
+
+      it "prevents adding a carnivore to an herbivore" do
+        #cage an herbivore....
+        single_caged_herbivore.save
+        #try to add a carnivore...
+        put to_cage_dinosaurs_path, single_caged_carnivore.as_json(root: true, include: [:species, :cage]), format: :json
+
+        expect(response).to have_http_status 422
+        expect(JSON.parse(response.body)['messages']['Unhappy Buffet Cage:']).to \
+        eq(["Cannot have a carnivore and herbivore in the same cage."])
+      end
+
+      it "prevents adding an herbivore to a carnivore" do
+        #cage a carnivore...
+        single_caged_carnivore.save
+        #try to add an herbivore...
+        put to_cage_dinosaurs_path, single_caged_herbivore.as_json(root: true, include: [:species, :cage]), format: :json
+
+        expect(response).to have_http_status 422
+        expect(JSON.parse(response.body)['messages']['Unhappy Buffet Cage:']).to \
+        eq(["Cannot have a carnivore and herbivore in the same cage."])
+      end
+
+      it "prevents two different species of carnivore" do
+        #because we built our dinosaur factory to cycle through species, asking for
+        #two carnivores is guaranteed to produce two different species.
+        a_carnivore, different_caged_carnivore = create_list(:dinosaur, 2, :carnivore)
+        #add a carnivore of one species...
+        assign_cage(a_carnivore, test_cage_on).save
+        #now try to add a carnivore of a different species...
+        assign_cage(different_caged_carnivore, test_cage_on)
+
+        put to_cage_dinosaurs_path, different_caged_carnivore.as_json(root: true, include: [:species, :cage]), format: :json
+
+        expect(response).to have_http_status 422
+        expect(JSON.parse(response.body)['messages']['Unhappy FightClub Cage']).to \
+        eq(["Cannot have multiple carnivorous species in the same cage"])
+      end
+    end
   end
+
 end
