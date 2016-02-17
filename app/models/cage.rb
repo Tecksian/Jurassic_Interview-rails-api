@@ -1,10 +1,14 @@
 # Cages don't need a name, so we just use id as our cage number.
 class Cage < ActiveRecord::Base
   #define a scope for simpler filtering/querying
-  scope :cage_status_filter, -> (p_status) {where(powered_up: self.status_hash[p_status])}
 
-  #make sure max_occupancy is a positive integer
+  scope :cage_status_filter, -> (p_status) { where('powered_up' == self.status_hash[p_status]) }
+  # TODO: replace the string in the scope where clause with a symbol
+  # TODO: generate errors if status value is invalid
+
+  # make sure max_occupancy is a positive integer
   validates :max_occupancy, presence: true, numericality: { only_integer: true, greater_than: 0 }
+
   # many validations don't need to be performed if the cage is empty
   with_options unless: :is_empty? do
     # update the survey of carnivorous species in this cage
@@ -21,7 +25,7 @@ class Cage < ActiveRecord::Base
   has_many :dinosaurs, validate: true,  inverse_of: :cage
 
   attr_reader :current_occupancy
-  attr_accessor :powered_up
+  # attr_accessor :powered_up
 
   # the attributes to display in serialization
   def attributes
@@ -100,11 +104,11 @@ class Cage < ActiveRecord::Base
 
   #avoid having to type "ACTIVE" and/or "INACTIVE" a bazillion times...
   def self.status_hash
-    @status_hash={"ACTIVE"=> true, "INACTIVE"=> false}
+    @status_hash={"ACTIVE"=> true, "INACTIVE"=> false}.with_indifferent_access
   end
 
   def self.powered_hash
-    @powered_hash = {true => "ACTIVE", false => "INACTIVE", nil => "INACTIVE"}
+    @powered_hash = {true => "ACTIVE", false => "INACTIVE", nil => "INACTIVE"}.with_indifferent_access
   end
 
 end
