@@ -21,10 +21,11 @@ class Cage < ActiveRecord::Base
   has_many :dinosaurs, validate: true,  inverse_of: :cage
 
   attr_reader :current_occupancy
+  attr_accessor :powered_up
 
   # the attributes to display in serialization
   def attributes
-    {id: nil, max_occupancy: 5, powered_up: true, current_occupancy: current_occupancy}
+    {id: nil, max_occupancy: 5, status: status, current_occupancy: current_occupancy}
   end
 
   # the number of dinosaurs currently in this cage
@@ -67,7 +68,7 @@ class Cage < ActiveRecord::Base
   end
   # are there any herbivores in the cage?
   def any_herbivores?
-    @carnivores.count <= current_occupancy
+    @carnivores.count < current_occupancy
   end
   #are there any carnivores in the cage?
   def has_carnivore?
@@ -93,9 +94,9 @@ class Cage < ActiveRecord::Base
     @status = self.class.powered_hash[powered_up]
   end
 
-  def status=(power_status)
-    self.powered_up=self.class.status_hash[power_status]
-  end
+  # def status=(power_status)
+  #   self.powered_up=self.class.status_hash[power_status]
+  # end
 
   #avoid having to type "ACTIVE" and/or "INACTIVE" a bazillion times...
   def self.status_hash
