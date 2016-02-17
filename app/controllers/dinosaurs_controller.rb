@@ -4,14 +4,12 @@ class DinosaursController < ApplicationController
   # GET /dinosaurs
   # GET /dinosaurs.json
   def index
-    if @filter_on_field.nil?
+    if params[:species_name].nil?
       @dinosaurs = Dinosaur.all
     else
-      #if we're filtering on species_name, convert to regular old name for use in Species
-      @filter_on_field = 'name' if @filter_on_field.to_s == 'species_name'
-
-      @dinosaurs = Dinosaur.joins(:species).merge( Species.where(filter_on_field.to_s => filter_on_value))
+      @dinosaurs = Species.name_filter(params[:species_name]).joins :dinosaurs
     end
+    #TODO generate errors for invalid parameters/valuies
     exposes @dinosaurs
   end
 

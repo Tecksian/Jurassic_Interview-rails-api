@@ -4,6 +4,7 @@ include ActiveModel::Serializers::JSON
 # attributes for species_name, is_carnivore, and allowed viewing of cage_id which is functionally similar
 # to a cage number.
 class Dinosaur < ActiveRecord::Base
+  scope :dinosaur_species_name, -> (find_name) { joins(:species).merge(Species.where(name: find_name)) }
   validates :name,
             presence: true,
             # The problem description does not specify unique names, but the alternative
