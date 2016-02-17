@@ -66,3 +66,8 @@ Why do two releases for such a simple project? To illustrate my general approach
 
 * On comments
 For these sorts of excercises, we enjoy explaining more than just the bare descriptions for use by automatic document generators. For rease of reading, I'll compile a list of the longer comments. Please be assured, however, that in a professional environment I don't spam the comments the way I do here.
+
+= Final thoughts
+
+There's an embarassing amount of refactoring, optimization, and structural improvements I could make, had I an extra few hours. We don't, so we are committing/releasing as it is now. However, I do intend to create an 'If time had permitted' branch....so if there are concerns about the DRY-ness of 'Rubyist' nature of my code, do consider taking a look there as well?
+
