@@ -25,7 +25,7 @@ class Cage < ActiveRecord::Base
   has_many :dinosaurs, validate: true,  inverse_of: :cage
 
   attr_reader :current_occupancy
-  # attr_accessor :powered_up
+  attr_accessor :status
 
   # the attributes to display in serialization
   def attributes

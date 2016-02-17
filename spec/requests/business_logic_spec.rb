@@ -15,7 +15,7 @@ RSpec.describe "Dinosaurs", type: :request do
     # an empty cage with the power on
     let!(:test_cage_on) { create(:cage, powered_up: true)}
     # a dinosaur who has been assigned a cage
-    let(:single_caged_dinosaur) {assign_cage(single_dinosaur, test_cage_on)}
+    let!(:single_caged_dinosaur) {assign_cage(single_dinosaur, test_cage_on)}
 
     # can we add a dino to a cage?
     it "adds a dinosaur to a cage" do
@@ -94,5 +94,24 @@ RSpec.describe "Dinosaurs", type: :request do
       end
     end
   end
+end
 
+
+describe "/cages?status=" do
+  let(:number_of_active) {3+rand(7)}
+  let(:number_of_inactive) {3+rand(7)}
+  let(:on_cages) {create_list(:cage, number_of_active, status: 'ACTIVE')}
+  let(:off_cages) {create_list(:cage, number_of_inactive, status: 'INACTIVE')}
+
+  it "filters by /cages/?status=ACTIVE" do
+    on_cages
+    get cages_path+'?status=ACTIVE'
+    expect(response).to have_exposed on_cages
+  end
+
+  it "filters by /cages/?status=INACTIVE" do
+    off_cages
+    get cages_path+'?status=INACTIVE'
+    expect(response).to have_exposed off_cages
+  end
 end
