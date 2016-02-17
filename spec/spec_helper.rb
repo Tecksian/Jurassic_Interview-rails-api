@@ -48,3 +48,9 @@ RSpec.configure do |config|
   config.include RocketPants::TestHelper,    :type => :request
   config.include RocketPants::RSpecMatchers, :type => :request
 end
+
+#a spec helper to assign a dino to a cage.
+def assign_cage(dino, cage)
+  dino.cage=cage
+  dino
+end

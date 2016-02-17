@@ -8,5 +8,10 @@ FactoryGirl.define do
     sequence(:name){ |index| "Testasaurus-#{index}"}
 
     species { attributes_for(:species)[:id] }
+
+    trait :caged do
+      cage {create(:cage)}
+    end
+
   end
 end
