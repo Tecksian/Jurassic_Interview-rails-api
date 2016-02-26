@@ -38,7 +38,7 @@ class CagesController < ApplicationController
     if @cage.update(cage_params)
       head :no_content
     else
-      expose @cage.errors, status: :unprocessable_entity
+      error! :invalid_resource ,@cage.errors.messages, status: :unprocessable_entity
     end
   end
 
