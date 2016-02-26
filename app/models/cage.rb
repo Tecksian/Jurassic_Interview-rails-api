@@ -98,9 +98,9 @@ class Cage < ActiveRecord::Base
     @status = self.class.powered_hash[powered_up]
   end
 
-  # def status=(power_status)
-  #   self.powered_up=self.class.status_hash[power_status]
-  # end
+  def status=(power_status)
+    self.powered_up=self.class.status_hash[power_status]
+  end
 
   #avoid having to type "ACTIVE" and/or "INACTIVE" a bazillion times...
   def self.status_hash
