@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>API-HowToUse-README - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-Create+a+dinosaur+with+no+species+key">Create a dinosaur with no species key</a>
+    <li><a href="#label-Create+a+dinosaur+with+a+species+key">Create a dinosaur with a species key</a>
+    <li><a href="#label-Try+to+add+another+dinosaur+with+the+same+name">Try to add another dinosaur with the same name</a>
+    <li><a href="#label-View+all+dinosaurs">View all dinosaurs</a>
+    <li><a href="#label-View+only+dinosaurs+that+are+triceratops">View only dinosaurs that are triceratops</a>
+    <li><a href="#label-Create+a+cage">Create a cage</a>
+    <li><a href="#label-Power+off+a+cage">Power off a cage</a>
+    <li><a href="#label-Put+a+dinosaur+in+a+cage">Put a dinosaur in a cage</a>
+    <li><a href="#label-Try+to+power+off+a+cage+with+a+dino+in+it-3A">Try to power off a cage with a dino in it:</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./API-HowToUse-README.html">API-HowToUse-README</a>
+  
+    <li><a href="./API-HowToUse-README.html">API-HowToUse-README</a>
+  
+    <li><a href="./Gemfile.html">Gemfile</a>
+  
+    <li><a href="./Gemfile_lock.html">Gemfile.lock</a>
+  
+    <li><a href="./README_rdoc.html">README</a>
+  
+    <li><a href="./Rakefile.html">Rakefile</a>
+  
+    <li><a href="./config_ru.html">config.ru</a>
+  
+    <li><a href="./log/development_log.html">development.log</a>
+  
+    <li><a href="./log/test_log.html">test.log</a>
+  
+    <li><a href="./public/404_html.html">404.html</a>
+  
+    <li><a href="./public/422_html.html">422.html</a>
+  
+    <li><a href="./public/500_html.html">500.html</a>
+  
+    <li><a href="./public/favicon_ico.html">favicon.ico</a>
+  
+    <li><a href="./public/robots_txt.html">robots</a>
+  
+    <li><a href="./tmp/pids/server_pid.html">server.pid</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page API-HowToUse-README.rdoc">
+
+<h1 id="label-Create+a+dinosaur+with+no+species+key">Create a dinosaur with no species key<span><a href="#label-Create+a+dinosaur+with+no+species+key">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<pre>POSTing to /dinosaurs with:
+{
+ &quot;dinosaur&quot; : {
+     &quot;name&quot; : &quot;Testasaurus-1&quot;,
+     &quot;species_name&quot;: &quot;Triceratops&quot;
+ }
+}</pre>
+
+<p>returns:</p>
+
+<pre>{
+  &quot;response&quot;: {
+    &quot;name&quot;: &quot;Testasaurus-1&quot;,
+    &quot;species_name&quot;: &quot;Triceratops&quot;,
+    &quot;is_carnivore&quot;: false,
+    &quot;cage_id&quot;: null
+  }
+}</pre>
+
+<h1 id="label-Create+a+dinosaur+with+a+species+key">Create a dinosaur with a species key<span><a href="#label-Create+a+dinosaur+with+a+species+key">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<pre>{
+ &quot;dinosaur&quot; : {
+     &quot;name&quot; : &quot;Simone2&quot;,
+     &quot;species&quot;:
+     {
+         &quot;name&quot; : &quot;Velociraptor&quot;
+     }
+ }
+}</pre>
+
+<p>returns: {</p>
+
+<pre>&quot;response&quot;: {
+  &quot;name&quot;: &quot;Simone2&quot;,
+  &quot;species_name&quot;: &quot;Velociraptor&quot;,
+  &quot;is_carnivore&quot;: true,
+  &quot;cage_id&quot;: null
+}</pre>
+
+<p>}</p>
+
+<h1 id="label-Try+to+add+another+dinosaur+with+the+same+name">Try to add another dinosaur with the same name<span><a href="#label-Try+to+add+another+dinosaur+with+the+same+name">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<pre>POST /dinosaurs with:
+{
+ &quot;dinosaur&quot; : {
+     &quot;name&quot; : &quot;Simone2&quot;,
+     &quot;species_name&quot; : &quot;Stegalosaurus&quot;
+ }
+}</pre>
+
+<p>returns:</p>
+
+<pre>{
+  &quot;error&quot;: &quot;conflict&quot;,
+  &quot;error_description&quot;: &quot;The request conflicts with an existing resource.&quot;,
+  &quot;name_already_taken&quot;: &quot;Simone2&quot;
+}</pre>
+
+<h1 id="label-View+all+dinosaurs">View all dinosaurs<span><a href="#label-View+all+dinosaurs">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<pre>GET /dinosaurs
+{
+  &quot;response&quot;: [
+    {
+      &quot;name&quot;: &quot;Testasaurus-1&quot;,
+      &quot;species_name&quot;: &quot;Triceratops&quot;,
+      &quot;is_carnivore&quot;: false,
+      &quot;cage_id&quot;: null
+    },
+    {
+      &quot;name&quot;: &quot;Simone2&quot;,
+      &quot;species_name&quot;: &quot;Velociraptor&quot;,
+      &quot;is_carnivore&quot;: true,
+      &quot;cage_id&quot;: null
+    }
+  ],
+  &quot;count&quot;: 2
+}</pre>
+
+<h1 id="label-View+only+dinosaurs+that+are+triceratops">View only dinosaurs that are triceratops<span><a href="#label-View+only+dinosaurs+that+are+triceratops">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<pre>GET /dinosaurs?species_name=Triceratops
+{
+  &quot;response&quot;: [
+    {
+      &quot;name&quot;: &quot;Triceratops&quot;,
+      &quot;is_carnivore&quot;: false
+    }
+  ],
+  &quot;count&quot;: 1
+}</pre>
+
+<h1 id="label-Create+a+cage">Create a cage<span><a href="#label-Create+a+cage">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<pre>POST /cages
+{
+     &quot;cage&quot;:
+     {
+         &quot;max_occupancy&quot; : 3,
+         &quot;status&quot; : &quot;ACTIVE&quot;
+     }
+
+}</pre>
+
+<p>returns</p>
+
+<pre>{
+  &quot;response&quot;: {
+    &quot;id&quot;: 15,
+    &quot;max_occupancy&quot;: 3,
+    &quot;status&quot;: &quot;ACTIVE&quot;,
+    &quot;current_occupancy&quot;: 0
+  }
+}</pre>
+
+<h1 id="label-Power+off+a+cage">Power off a cage<span><a href="#label-Power+off+a+cage">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<pre>POST /cages
+{
+     &quot;cage&quot;:
+     {
+         &quot;id&quot;: 15,
+         &quot;status&quot; : &quot;INACTIVE&quot;
+     }
+
+}</pre>
+
+<p>returns nothing, as expected.</p>
+
+<h1 id="label-Put+a+dinosaur+in+a+cage">Put a dinosaur in a cage<span><a href="#label-Put+a+dinosaur+in+a+cage">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<pre>PUT /dinosaurs/to_cage with:
+    {
+     &quot;dinosaur&quot; : {
+         &quot;name&quot; : &quot;Simone1&quot;,
+         &quot;cage&quot;:
+         {
+             &quot;id&quot; : &quot;15&quot;
+         }
+     }
+    }</pre>
+
+<p>returns:</p>
+
+<pre>{
+  &quot;response&quot;: {
+    &quot;name&quot;: &quot;Simone0&quot;,
+    &quot;species_name&quot;: &quot;Triceratops&quot;,
+    &quot;is_carnivore&quot;: false,
+    &quot;cage_id&quot;: 15
+  }
+}</pre>
+
+<h1 id="label-Try+to+power+off+a+cage+with+a+dino+in+it-3A">Try to power off a cage with a dino in it:<span><a href="#label-Try+to+power+off+a+cage+with+a+dino+in+it-3A">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<pre>/cages/15 with:
+{
+     &quot;cage&quot;:
+     {
+         &quot;id&quot;: 15,
+         &quot;status&quot; : &quot;INACTIVE&quot;
+     }
+
+}</pre>
+
+<p>returns:</p>
+
+<pre>{
+  &quot;error&quot;: &quot;invalid_resource&quot;,
+  &quot;error_description&quot;: &quot;The current resource was deemed invalid.&quot;,
+  &quot;messages&quot;: {
+    &quot;powered_up&quot;: [
+      &quot;Cannot have a dinosaur in a cage that is powered off. &quot;
+    ]
+  }
+}</pre>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
