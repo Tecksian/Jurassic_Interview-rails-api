@@ -57,6 +57,6 @@ class CagesController < ApplicationController
   end
 
   def cage_params
-    params.require(:cage).permit(:max_occupancy, :powered_up)
+    params.require(:cage).permit(:max_occupancy, :powered_up, :status)
   end
 end
